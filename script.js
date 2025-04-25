@@ -18,12 +18,13 @@ async function loadData() {
         tr.classList.add("row-enter-active");
       }, 100 * index);
       
-      row.forEach(cell => {
-        const td = document.createElement("td");
-        td.className = "border px-4 py-2";
-        td.textContent = cell;
-        tr.appendChild(td);
-      });
+    ["nombre", "apellido", "horario"].forEach(key => {
+    const td = document.createElement("td");
+      td.className = "border px-4 py-2";
+      td.textContent = row[key];
+      tr.appendChild(td);
+    });
+
 
       tbody.appendChild(tr);
     });

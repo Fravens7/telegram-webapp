@@ -5,26 +5,26 @@ async function loadData() {
     const spinner = document.getElementById("spinner");
     const table = document.getElementById("data-table");
     const tbody = table.querySelector("tbody");
-    
+
     const response = await fetch(API_URL);
     const data = await response.json();
-    
+
     tbody.innerHTML = "";
-    
+
     data.forEach((row, index) => {
       const tr = document.createElement("tr");
       tr.className = "bg-white text-gray-800 row-enter";
+
       setTimeout(() => {
         tr.classList.add("row-enter-active");
       }, 100 * index);
-      
-    ["nombre", "apellido", "horario"].forEach(key => {
-    const td = document.createElement("td");
-      td.className = "border px-4 py-2";
-      td.textContent = row[key];
-      tr.appendChild(td);
-    });
 
+      ["nombre", "apellido", "horario"].forEach(key => {
+        const td = document.createElement("td");
+        td.className = "border px-4 py-2";
+        td.textContent = row[key];
+        tr.appendChild(td);
+      });
 
       tbody.appendChild(tr);
     });
@@ -38,3 +38,4 @@ async function loadData() {
 }
 
 window.onload = loadData;
+

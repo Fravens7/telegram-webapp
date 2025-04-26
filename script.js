@@ -49,5 +49,3 @@ async function loadData() {
 }
 
 window.onload = loadData;
-window.onload = loadData;
-

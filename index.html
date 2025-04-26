@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Horario WebApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -16,6 +17,7 @@
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
       </svg>
     </div>
+
     <table id="data-table" class="w-full hidden table-auto border-collapse text-sm rounded-lg overflow-hidden shadow-lg">
       <thead class="bg-blue-600 text-white">
         <tr>
@@ -27,6 +29,14 @@
       </thead>
       <tbody></tbody>
     </table>
+
+    <!-- Botón de Descargar PNG -->
+    <div class="flex justify-center my-6">
+      <button onclick="descargarTabla()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg">
+        🗂️ Descargar en PNG
+      </button>
+    </div>
+
   </div>
   <script type="module" src="script.js"></script>
 </body>

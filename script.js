@@ -1,4 +1,4 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const supabaseUrl = 'https://syjudliqddjntuhmprbv.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5anVkbGlxZGRqbnR1aG1wcmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NjQ3NzgsImV4cCI6MjA2MTI0MDc3OH0.wUYdldfz1dxDw3yMEIvur0egqcd7EYSRBV3GV-m0gG0';
@@ -24,11 +24,7 @@ async function loadData() {
 
     data.forEach((row, index) => {
       const tr = document.createElement("tr");
-      tr.className = "bg-white text-gray-800 row-enter";
-
-      setTimeout(() => {
-        tr.classList.add("row-enter-active");
-      }, 100 * index);
+      tr.className = "bg-white text-gray-800";
 
       ["nombre", "fecha", "turno", "modalidad"].forEach(key => {
         const td = document.createElement("td");
@@ -49,3 +45,17 @@ async function loadData() {
 }
 
 window.onload = loadData;
+
+// Nueva funcion para descargar la tabla como PNG
+window.descargarTabla = async function() {
+  const tabla = document.getElementById("data-table");
+
+  if (!tabla) return;
+
+  html2canvas(tabla, { backgroundColor: null }).then((canvas) => {
+    const link = document.createElement("a");
+    link.download = "horario.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}

@@ -1,4 +1,8 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbxlFI24VM5frmWeGHCyHFf4imso68BvxaiUo9yilm9sE7EnCXA91nPntltrmAW7p2Na/exec";
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabaseUrl = 'https://syjudliqddjntuhmprbv.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5anVkbGlxZGRqbnR1aG1wcmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NjQ3NzgsImV4cCI6MjA2MTI0MDc3OH0.wUYdldfz1dxDw3yMEIvur0egqcd7EYSRBV3GV-m0gG0';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function loadData() {
   try {
@@ -6,8 +10,15 @@ async function loadData() {
     const table = document.getElementById("data-table");
     const tbody = table.querySelector("tbody");
 
-    const response = await fetch(API_URL);
-    const data = await response.json();
+    const { data, error } = await supabase
+      .from('horarios')
+      .select('*')
+      .order('fecha', { ascending: true });
+
+    if (error) {
+      console.error('Error al cargar los datos:', error);
+      return;
+    }
 
     tbody.innerHTML = "";
 
@@ -19,7 +30,7 @@ async function loadData() {
         tr.classList.add("row-enter-active");
       }, 100 * index);
 
-      ["nombre", "apellido", "horario"].forEach(key => {
+      ["nombre", "fecha", "turno", "modalidad"].forEach(key => {
         const td = document.createElement("td");
         td.className = "border px-4 py-2";
         td.textContent = row[key];
@@ -37,5 +48,6 @@ async function loadData() {
   }
 }
 
+window.onload = loadData;
 window.onload = loadData;
 
